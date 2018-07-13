@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.his.features.movies
+package com.his.features.movies.data
 
+import com.his.features.movies.data.repository.net.api.MoviesApi
 import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Singleton

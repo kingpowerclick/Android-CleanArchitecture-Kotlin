@@ -13,17 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.his.features.movies
+package com.his.features.movies.data.entity
 
-import android.content.Context
-import android.content.Intent
-import com.his.core.platform.BaseActivity
+import com.his.core.extension.empty
 
-class MoviesActivity : BaseActivity() {
+data class MovieDetailsEntity(val id: Int,
+                              val title: String,
+                              val poster: String,
+                              val summary: String,
+                              val cast: String,
+                              val director: String,
+                              val year: Int,
+                              val trailer: String) {
 
 	companion object {
-		fun callingIntent(context: Context) = Intent(context, MoviesActivity::class.java)
+		fun empty() = MovieDetailsEntity(0, String.empty(), String.empty(), String.empty(),
+			String.empty(), String.empty(), 0, String.empty())
 	}
-
-	override fun fragment() = MoviesFragment()
 }

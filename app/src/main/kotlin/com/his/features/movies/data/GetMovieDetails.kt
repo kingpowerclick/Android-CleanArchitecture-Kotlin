@@ -13,13 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.his.features.movies
+package com.his.features.movies.data
 
-data class MovieDetailsView(val id: Int,
-                            val title: String,
-                            val poster: String,
-                            val summary: String,
-                            val cast: String,
-                            val director: String,
-                            val year: Int,
-                            val trailer: String)
+import com.his.core.interactor.UseCase
+import com.his.features.movies.view.model.MovieDetails
+import io.reactivex.Observable
+import javax.inject.Inject
+
+class GetMovieDetails
+@Inject constructor(private val moviesRepository: MoviesRepository) : UseCase<MovieDetails, GetMovieDetails.Params>() {
+
+	override fun buildUseCase(params: Params): Observable<MovieDetails> {
+		return moviesRepository.movieDetails(params.id)
+	}
+
+	data class Params(val id: Int) : Parameter.FeatureParameter()
+}

@@ -13,23 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.his.features.movies
+package com.his.features.movies.view.model
 
-import android.content.Context
-import android.content.Intent
-import com.his.core.platform.BaseActivity
+import android.os.Parcel
+import com.his.core.platform.KParcelable
+import com.his.core.platform.parcelableCreator
 
-class MovieDetailsActivity : BaseActivity() {
-
+data class MovieView(val id: Int, val poster: String) :
+	KParcelable {
 	companion object {
-		private const val INTENT_EXTRA_PARAM_MOVIE = "com.his.INTENT_PARAM_MOVIE"
-
-		fun callingIntent(context: Context, movie: MovieView): Intent {
-			val intent = Intent(context, MovieDetailsActivity::class.java)
-			intent.putExtra(INTENT_EXTRA_PARAM_MOVIE, movie)
-			return intent
-		}
+		@JvmField
+		val CREATOR = parcelableCreator(
+			::MovieView)
 	}
 
-	override fun fragment() = MovieDetailsFragment.forMovie(intent.getParcelableExtra(INTENT_EXTRA_PARAM_MOVIE))
+	constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString())
+
+	override fun writeToParcel(dest: Parcel, flags: Int) {
+		with(dest) {
+			writeInt(id)
+			writeString(poster)
+		}
+	}
 }

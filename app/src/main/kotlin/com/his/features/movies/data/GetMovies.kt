@@ -13,22 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.his.features.movies
+package com.his.features.movies.data
 
+import com.his.core.interactor.UseCase
+import com.his.core.interactor.UseCase.Parameter
+import com.his.features.movies.data.MoviesRepository
+import com.his.features.movies.view.model.Movie
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.Path
+import javax.inject.Inject
 
-internal interface MoviesApi {
-	@GET(MOVIES)
-	fun movies(): Observable<List<MovieEntity>>
+class GetMovies
+@Inject constructor(private val moviesRepository: MoviesRepository) : UseCase<List<Movie>, Parameter.None>() {
 
-	@GET(MOVIE_DETAILS)
-	fun movieDetails(@Path(PARAM_MOVIE_ID) movieId: Int): Observable<MovieDetailsEntity>
-
-	companion object {
-		private const val PARAM_MOVIE_ID = "movieId"
-		private const val MOVIES = "movies.json"
-		private const val MOVIE_DETAILS = "movie_0{$PARAM_MOVIE_ID}.json"
+	override fun buildUseCase(params: Parameter.None): Observable<List<Movie>> {
+		return moviesRepository.movies()
 	}
 }

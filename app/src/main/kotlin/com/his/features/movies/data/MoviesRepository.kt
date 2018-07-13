@@ -13,8 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.his.features.movies
+package com.his.features.movies.data
 
-data class MovieEntity(private val id: Int, private val poster: String) {
-	fun toMovie() = Movie(id, poster)
+import com.his.features.movies.view.model.Movie
+import com.his.features.movies.view.model.MovieDetails
+import io.reactivex.Observable
+
+interface MoviesRepository {
+	fun movies(): Observable<List<Movie>>
+	fun movieDetails(movieId: Int): Observable<MovieDetails>
 }

@@ -13,17 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.his.features.movies
+package com.his.features.movies.view.model
 
-import com.his.core.interactor.UseCase
-import com.his.core.interactor.UseCase.Parameter
-import io.reactivex.Observable
-import javax.inject.Inject
+import com.his.core.extension.empty
 
-class GetMovies
-@Inject constructor(private val moviesRepository: MoviesRepository) : UseCase<List<Movie>, Parameter.None>() {
+data class Movie(val id: Int, val poster: String) {
 
-	override fun buildUseCase(params: Parameter.None): Observable<List<Movie>> {
-		return moviesRepository.movies()
+	companion object {
+		fun empty() = Movie(0, String.empty())
 	}
 }
