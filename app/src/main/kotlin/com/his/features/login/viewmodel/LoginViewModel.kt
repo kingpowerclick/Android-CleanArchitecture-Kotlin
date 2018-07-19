@@ -40,7 +40,7 @@ class LoginViewModel @Inject constructor(private val mLogin: LoginByUserId) : Ba
 	}
 
 	companion object {
-		private val KEY_CLIENT_ID = "2"
-		private val KEY_CLIENT_SECRET = "GipwZrnLkZfzEIOBHchQ9YtcILc1eg8fh4ZvNukY"
+		private const val KEY_CLIENT_ID = "2"
+		private const val KEY_CLIENT_SECRET = "GipwZrnLkZfzEIOBHchQ9YtcILc1eg8fh4ZvNukY"
 	}
 }
